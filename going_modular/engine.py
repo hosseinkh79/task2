@@ -37,7 +37,7 @@ def one_step_train(model,
             log_probs, targets, input_lengths, target_lengths
         )
         
-        train_loss += -(loss.item())
+        train_loss += (loss.item())
 
         loss.backward()
         optimizer.step()
@@ -85,14 +85,14 @@ def one_step_test(model,
                 log_probs, targets, input_lengths, target_lengths
             )
 
-            test_loss += -(loss.item())
+            test_loss += (loss.item())
 
-        preds = decode_predictions(outputs)
-        for j in range(len(preds)):
-            if compare_equality(first_list= preds[j], label_list=targets[j].numpy()):
-                # print(f'i {i}')
-                # print(f'1')
-                test_acc += 1
+            preds = decode_predictions(outputs)
+            for j in range(len(preds)):
+                if compare_equality(first_list= preds[j], label_list=targets[j].numpy()):
+                    # print(f'i {i}')
+                    # print(f'1')
+                    test_acc += 1
 
     test_loss = test_loss/ len(test_dataloader)
     test_acc = test_acc/(len(test_dataloader) * configs.BATCH_SIZE)
