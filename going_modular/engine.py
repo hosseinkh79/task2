@@ -46,10 +46,7 @@ def one_step_train(model,
         preds = decode_predictions(outputs)
         for j in range(len(preds)):
             if compare_equality(first_list= preds[j], label_list=targets[j].numpy()):
-                # print(f'i {i}')
                 train_acc += 1
-
-    print(train_acc)
 
     train_loss = train_loss/len(train_dataloader)
     train_acc = train_acc/(len(train_dataloader) * configs.BATCH_SIZE)
@@ -93,11 +90,9 @@ def one_step_test(model,
         preds = decode_predictions(outputs)
         for j in range(len(preds)):
             if compare_equality(first_list= preds[j], label_list=targets[j].numpy()):
-                print(f'i {i}')
-                print(f'1')
+                # print(f'i {i}')
+                # print(f'1')
                 test_acc += 1
-
-    print(test_acc)
 
     test_loss = test_loss/ len(test_dataloader)
     test_acc = test_acc/(len(test_dataloader) * configs.BATCH_SIZE)
