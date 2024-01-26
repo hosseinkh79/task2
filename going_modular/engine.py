@@ -29,7 +29,8 @@ def one_step_train(model,
         input_lengths = torch.full(
             size=(configs.BATCH_SIZE,), fill_value=log_probs.size(0), dtype=torch.int32
         )
-        # print(f'input lengths: {input_lengths}')
+        # print(f'log_probs shape: {log_probs.shape}')
+        # print(f'targets shape: {targets.shape}')
 
         target_lengths = torch.full(
             size=(configs.BATCH_SIZE,), fill_value=targets.size(1), dtype=torch.int32

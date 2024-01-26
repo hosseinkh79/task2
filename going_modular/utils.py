@@ -16,9 +16,9 @@ def compare_equality(first_list, label_list):
       # Increment the label index
       label_index += 1
     # Check if the label index is valid and the corresponding label is zero
-    elif label_index < len(label_list) and label_list[label_index] == 0:
+    elif label_index < len(label_list) and label_list[label_index] == 10:
       # Insert zero to the third list at the same index
-      predicted_list.insert(label_index, 0)
+      predicted_list.insert(label_index, 10)
       # Increment the label index
       label_index += 1
   # Return the third list
