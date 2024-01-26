@@ -49,10 +49,10 @@ def decode_predictions(preds):
 def plot_loss_curves(results):
 
     loss = results["train_loss"]
-    test_loss = results["val_loss"]
+    test_loss = results["test_loss"]
 
     accuracy = results["train_acc"]
-    test_accuracy = results["val_acc"]
+    test_accuracy = results["test_acc"]
 
     epochs = range(len(results["train_loss"]))
 

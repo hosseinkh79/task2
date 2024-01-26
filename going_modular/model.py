@@ -23,19 +23,31 @@ class CRNN(nn.Module):
     def forward(self, x):
         bs, _, _, _ = x.shape
         # Convolutional layers
+        print(f'x size : {x.shape}')
         x = F.relu(self.conv1(x))
+        print(f'x size : {x.shape}')
         x = self.pool1(x)
+        print(f'x size : {x.shape}')
         x = F.relu(self.conv2(x))
+        print(f'x size : {x.shape}')
         x = self.pool2(x)
+        print(f'x size : {x.shape}')
         x = x.permute(0, 3, 1, 2)
+        print(f'x size permute(0, 3, 1, 2) : {x.shape}')
         x = x.view(bs, x.size(1), -1)
+        print(f'x size . input to lstm : {x.shape}')
 
         # Recurrent layers
         x, _ = self.lstm1(x)
+        print(f'x size out lstm1 : {x.shape}')
         x, _ = self.lstm2(x)
+        print(f'x size : {x.shape}')
 
         x = self.fc_sequence(x)
+        print(f'x size : {x.shape}')
         x = x.permute(1, 0, 2)
+        print(f'x size : {x.shape}')
+        print(f'Finishhh--------------------------------------------------------')
 
         return x
     
