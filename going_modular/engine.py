@@ -48,7 +48,7 @@ def one_step_train(model,
         loss.backward()
         optimizer.step()
 
-        
+        # print(f'outputs.shape {outputs.shape}')
         preds = decode_predictions(outputs)
         for j in range(len(preds)):
             if compare_equality(first_list= preds[j], label_list=targets[j].cpu().numpy()):
