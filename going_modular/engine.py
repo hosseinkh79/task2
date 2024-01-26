@@ -29,15 +29,20 @@ def one_step_train(model,
         input_lengths = torch.full(
             size=(configs.BATCH_SIZE,), fill_value=log_probs.size(0), dtype=torch.int32
         )
+        # print(f'input lengths: {input_lengths}')
+
         target_lengths = torch.full(
             size=(configs.BATCH_SIZE,), fill_value=targets.size(1), dtype=torch.int32
         )
+        # print(f'target_lengths: {target_lengths}')
+
         blank = 0
         loss = nn.CTCLoss(blank=blank)(
             log_probs, targets, input_lengths, target_lengths
         )
         
         train_loss += (loss.item())
+        # print(loss.item())
 
         loss.backward()
         optimizer.step()
@@ -47,6 +52,7 @@ def one_step_train(model,
         for j in range(len(preds)):
             if compare_equality(first_list= preds[j], label_list=targets[j].cpu().numpy()):
                 train_acc += 1
+    # print(f'train_loss : {train_loss}')
 
     train_loss = train_loss/len(train_dataloader)
     train_acc = train_acc/(len(train_dataloader) * configs.BATCH_SIZE)
@@ -91,6 +97,7 @@ def one_step_test(model,
             for j in range(len(preds)):
                 if compare_equality(first_list= preds[j], label_list=targets[j].cpu().numpy()):
                     test_acc += 1
+    # print(f'test_loss : {test_loss}')
 
     test_loss = test_loss/ len(test_dataloader)
     test_acc = test_acc/(len(test_dataloader) * configs.BATCH_SIZE)
@@ -134,9 +141,9 @@ def train(model,
 
         print(
           f"Epoch: {epoch+1} | "
-          f"train_loss: {1+train_loss:.4f} | "
+          f"train_loss: {train_loss:.4f} | "
           f"train_acc: {train_acc:.4f} | "
-          f"test_loss: {1+test_loss:.4f} | "
+          f"test_loss: {test_loss:.4f} | "
           f"test_acc: {test_acc:.4f}"
         )
         
